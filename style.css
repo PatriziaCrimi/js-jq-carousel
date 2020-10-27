@@ -2,33 +2,52 @@ body {
   font-family: 'Nunito', sans-serif;
 }
 
+#page-wrapper {
+  height: 100vh;
+  width: 100vw;
+  background: rgb(2,0,36);
+  background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 14%, rgba(0,212,255,1) 96%);
+}
+
 h1 {
   font-weight: 900;
   text-transform: uppercase;
   letter-spacing: 1.5px;
+  padding: 50px 0;
+  color: darkblue;
+  text-shadow: 3px 3px #A9F5F2;
 }
 
-h2 {
-  font-weight: 800;
+.prev, .next {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-h3 {
-  font-weight: 700;
+.prev > i,
+.next > i {
+  color: #A9F5F2;
+  font-size: 30px;
 }
 
-p {
-  font-size: 20px;
+.slides {
+  width: 100%;
+  height: 350px;
 }
 
-
-/******************** Media Query *********************/
-
-/* Responsive - Breakpoint Medium 768px md */
-@media screen and (min-width: 768px) {
-
+.slides img {
+  width: 100%;
+  height: 100%;
+  display: none;
+  object-fit: cover;
 }
 
-/* Responsive - Breakpoint Extra Large 1200px xl */
-@media screen and (min-width: 1200px) {
+.slides img.active {
+  display: block;
+}
 
+.circles {
+  color: #A9F5F2;
+  padding-top: 40px;
 }
