@@ -7,10 +7,10 @@ Ad esempio: sto visualizzando la prima immagine, clicco sul quarto pallino e si 
 */
 
 $(document).ready(function() {
-  // --------------------- Prev arrow ---------------------
+  // --------------------- Prev arrow sliding ---------------------
   // Clicking on prev-arrow to switch to the previous picture
   $('.prev > i').click(function() {
-    // Storing current picture position (of ".active") in a variable
+    // Storing current picture position in a variable ("img.active")
     var current_img = $('.slides > .active');
     // Storing current circle position (full circle) in a variable
     var current_circle = $('.circles > .fas');
@@ -32,10 +32,10 @@ $(document).ready(function() {
     }
   });
 
-  // --------------------- Next arrow ---------------------
+  // --------------------- Next arrow sliding ---------------------
   // Clicking on next-arrow to switch to the following picture
   $('.next > i').click(function() {
-    // Storing current picture position (of ".active") in a variable
+    // Storing current picture position in a variable ("img.active")
     var current_img = $('.slides > .active');
     // Storing current circle position (full circle) in a variable
     var current_circle = $('.circles > .fas');
@@ -58,9 +58,9 @@ $(document).ready(function() {
   });
 
 
-  // ------------ Clicking on circles to select the pictures ------------
+  // *********** Clicking on circles to select corresponding pictures ***********
 
-  // ******** Selecting any circle makes it full ********
+  // ------- Clicking on any circle makes it full (current circle) -------
   $('.circles > i').click(function() {
     // Making the other circles empty
     $('.circles > i').removeClass('fas');
@@ -68,53 +68,26 @@ $(document).ready(function() {
     // Making the clicked circle full (now current)
     $(this).removeClass('far');
     $(this).addClass('fas');
-  });
 
-// ******** Showing the picture corresponding to the circle clicked ********
-  var current_img = $('.slides > .active');
-  // Clicking on first circle
-  $('.circles > i:first-child').click(function() {
+
+    // ------- Showing the picture corresponding to the circle clicked -------
+
+    // ### SOLUTION NUMBER 1 - INDEX function & NTH-CHILD(index) ###
+
+    // Storing current picture in a variable ("img.active")
+    var current_img = $('.slides > .active');
     // Hiding current picture
     current_img.removeClass('active');
-    // Showing first picture
-    $('.slides > img:first-child').addClass('active');
-    // Changing current picture to the first picture
-    current_img = $('.slides > img:first-child');
-  });
-  // Clicking on second circle
-  $('.circles > i:nth-child(2)').click(function() {
-    // Hiding current picture
-    current_img.removeClass('active');
-    // Showing second picture
-    $('.slides > img:nth-child(2)').addClass('active');
-    // Changing current picture to the second picture
-    current_img = $('.slides > img:nth-child(2)');
-  });
-  // Clicking on third circle
-  $('.circles > i:nth-child(3)').click(function() {
-    // Hiding current picture
-    current_img.removeClass('active');
-    // Showing third picture
-    $('.slides > img:nth-child(3)').addClass('active');
-    // Changing current picture to the third picture
-    current_img = $('.slides > img:nth-child(3)');
-  });
-  // Clicking on fourth circle
-  $('.circles > i:nth-child(4)').click(function() {
-    // Hiding current picture
-    current_img.removeClass('active');
-    // Showing fourth picture
-    $('.slides > img:nth-child(4)').addClass('active');
-    // Changing current picture to the fourth picture
-    current_img = $('.slides > img:nth-child(4)');
-  });
-  // Clicking on fifth circle
-  $('.circles > i:last-child').click(function() {
-    // Hiding current picture
-    current_img.removeClass('active');
-    // Showing fifth picture
-    $('.slides > img:last-child').addClass('active');
-    // Changing current picture to the fifth picture
-    current_img = $('.slides > img:last-child');
+    // Checking what circle has been clicked (finding its number or position)
+    var index_circle = $(this).index();
+    // Finding the position of the corresponding picture
+    var index_img = index_circle + 1; // --> index starts from zero BUT nth-child starts from 1!
+    // Selecting and showing corresponding picture
+    $('.slides > img:nth-child(' + index_img + ')').addClass('active');
+
+
+    // ### SOLUTION NUMBER 2 - INDEX function & EQ function ###
+
+
   });
 });
