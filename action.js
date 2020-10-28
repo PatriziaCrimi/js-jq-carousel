@@ -58,36 +58,39 @@ $(document).ready(function() {
   });
 
 
-  // *********** Clicking on circles to select corresponding pictures ***********
+  // ********* Clicking on circles to select corresponding pictures *********
 
   // ------- Clicking on any circle makes it full (current circle) -------
-  $('.circles > i').click(function() {
-    // Making the other circles empty
-    $('.circles > i').removeClass('fas');
-    $('.circles > i').addClass('far');
-    // Making the clicked circle full (now current)
-    $(this).removeClass('far');
-    $(this).addClass('fas');
 
+  $('.circles > i').click(function() {
+    // Emptying all the full circles
+    $('.circles > i.fas').toggleClass('fas far'); // --> i.fas selects only full circles
+    // Making the clicked circle full
+    $(this).toggleClass('fas far');
 
     // ------- Showing the picture corresponding to the circle clicked -------
 
-    // ### SOLUTION NUMBER 1 - INDEX function & NTH-CHILD(index) ###
-
-    // Storing current picture in a variable ("img.active")
-    var current_img = $('.slides > .active');
-    // Hiding current picture
-    current_img.removeClass('active');
+    // Finding and hiding current picture (removing class "active")
+    $('.slides > .active').removeClass('active');
     // Checking what circle has been clicked (finding its number or position)
     var index_circle = $(this).index();
+
+    /*
+    // ### SOLUTION NUMBER 1 - INDEX function & NTH-CHILD(index+1) ###
     // Finding the position of the corresponding picture
     var index_img = index_circle + 1; // --> index starts from zero BUT nth-child starts from 1!
     // Selecting and showing corresponding picture
     $('.slides > img:nth-child(' + index_img + ')').addClass('active');
+    */
 
+    // ### SOLUTION NUMBER 2 - INDEX function & EQ(index) ###
+    // Finding and showing corresponding picture
+    $('.slides > img').eq(index_circle).addClass('active');
 
-    // ### SOLUTION NUMBER 2 - INDEX function & EQ function ###
-
-
+    /*
+    // ### SOLUTION NUMBER 3 - INDEX function & GET(index) ###
+    // Finding and showing corresponding picture
+    $('.slides > img').get(index_circle).classList.add('active');
+    */
   });
 });
